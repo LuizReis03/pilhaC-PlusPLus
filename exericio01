@@ -1,0 +1,69 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+//CRIA ESTRUTURA DE UMA PILHA
+struct pilha{
+	
+	int topo;
+	int capacidade;
+	float *pElem;
+	
+};
+
+pilha p;
+
+//FUNÇÃO PARA CRIA UMA PILHA
+void criaPilha (struct pilha *p, int c){
+	p -> topo -1;
+	p -> capacidade = c;
+	p->pElem = (float*) malloc (c * sizeof(float));
+}
+
+
+//FUNÇÃO PARA VERIFICAR SE A PILHA ESTÁ VAZIA
+int verificaPilhaVazia (struct pilha*p){
+	if (p -> topo == -1 ){
+		return 1;
+	}
+	else{
+		return 0;
+	}
+}
+
+//FUNÇÃO PARA VERIFICAR SE A PILHA ESTÁ CHEIA
+int verificaPilhaCheia(struct pilha*p) {
+	if(p->topo == p->capacidade -1){
+		return 1;
+	}
+	else{
+		return 0;
+	}
+}
+
+//FUNÇÃO PARA ADICIONAR A PILHA
+void empilha (struct pilha*p, float n ){
+	p-> topo++;
+	
+	p->pElem[p->topo] = n;
+	
+}
+
+//FUNÇÃO PARA RETIRAR DA PILHA
+void desempilha (struct pilha*p){
+	p-> topo--;
+	
+	float gerencia = p->pElem[p->topo];
+	
+	return gerencia;
+	
+}
+
+//
+float retornaAoTopo(struct pilha*p) {
+	return p->pElem [p->topo];
+}
+
+int main() {
+	
+}
