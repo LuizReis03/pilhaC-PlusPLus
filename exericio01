@@ -1,7 +1,9 @@
+#include <stdio.h>
+#include <conio.h>
+#include <stdlib.h> 
 #include <iostream>
-#include <cmath>
 using namespace std;
-
+	
 //CRIA ESTRUTURA DE UMA PILHA
 struct pilha{
 	
@@ -17,7 +19,7 @@ pilha p;
 void criaPilha (struct pilha *p, int c){
 	p -> topo -1;
 	p -> capacidade = c;
-	p->pElem = (float*) malloc (c * sizeof(float));
+	p -> pElem = (float*) malloc (c *sizeof(float));
 }
 
 
@@ -35,8 +37,7 @@ int verificaPilhaVazia (struct pilha*p){
 int verificaPilhaCheia(struct pilha*p) {
 	if(p->topo == p->capacidade -1){
 		return 1;
-	}
-	else{
+	}else{
 		return 0;
 	}
 }
@@ -50,7 +51,7 @@ void empilha (struct pilha*p, float n ){
 }
 
 //FUNÇÃO PARA RETIRAR DA PILHA
-void desempilha (struct pilha*p){
+float desempilha (struct pilha*p){
 	p-> topo--;
 	
 	float gerencia = p->pElem[p->topo];
@@ -65,5 +66,60 @@ float retornaAoTopo(struct pilha*p) {
 }
 
 int main() {
+	struct pilha novaPilha;
+	int capacidade = 0;
+	int opcao = 0;
+	float valor = 0.0;
+	
+	cout << "Digite a capacidade da pilha: ";
+	cin >> capacidade;
+	capacidade = capacidade +1;
+	criaPilha (&novaPilha, capacidade);
+	
+	
+	while (1){
+		cout << "\n1)Empilhar\n";
+		cout << "2)Desempilhar\n";
+		cout << "3)Mostrar topo da pilha\n";
+		cout << "4)Sair\n";
+		cout << "\nDigite a opcao desejada: ";
+		cin >> opcao;
+		
+		switch(opcao){
+			//empilha
+			case 1: 
+				if (verificaPilhaCheia(&novaPilha) == 1){
+					cout << "\nA pilha esta cheia!\n";
+				}else{
+					cout << "Digite o valor: ";
+					cin >> valor;
+					empilha(&novaPilha, valor);
+				}
+				break;
+			//desempilha
+			case 2:
+				if (verificaPilhaVazia(&novaPilha) == 1){
+					cout << "\nA pilha esta vazia!\n";
+				}else{
+					valor = desempilha(&novaPilha);
+					cout << "\nFoi desempilhado!\n";
+				}
+				break;
+			//mostra o topo da lista
+			case 3:
+				if (verificaPilhaVazia(&novaPilha) == 1){
+					cout << "\nA pilha esta vazia!\n";
+				}else{
+					valor = retornaAoTopo(&novaPilha);
+					cout << "\nO topo da pilha e: " << valor << "\n";
+				}
+				break;
+			//sai do loop
+			case 4:
+				exit(0);
+				break;
+		}
+		
+	}
 	
 }
